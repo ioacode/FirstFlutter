@@ -1,6 +1,43 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
+void main() => runApp(MaterialApp(
+  debugShowCheckedModeBanner: false,
+  title: 'Application intro',
+  home: HomePage(),
+));
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ContentPage(),
+    );
+  }
+}
+
+class ContentPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      height: 200,
+      color: Colors.red,
+    );
+  }
+}
+
+//https://github.com/myhomeworkstation/introapp
+
+
+
+
+
+
+
+
+ 
+ 
 
 class MyApp extends StatelessWidget {
   @override
@@ -10,7 +47,8 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("Container Test"), //title of tab
         ),
-        body: Container( //same with layout
+        body: Container(
+          //same with layout
           color: Colors.transparent,
           //margin: EdgeInsets.all(10), //give margin all edge
           //padding: EdgeInsets.all(10), //padding same all edge
