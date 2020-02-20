@@ -21,28 +21,31 @@ class HomePage extends StatelessWidget {
 class ContentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 30),
-      child: CarouselSlider(
-        autoPlay: false,
-        enableInfiniteScroll: false,
-        initialPage: 0,
-        reverse: false,
-        viewportFraction: 1.0,
-        aspectRatio: MediaQuery.of(context).size.aspectRatio,
-        height: MediaQuery.of(context).size.height - 30,
-        items: [0, 1, 2].map((i) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Container(
-                  width: MediaQuery.of(context).size.width,
-                  //margin: EdgeInsets.symmetric(horizontal: 5.0),  // give margins to left and right
-                  //decoration: BoxDecoration(color: Colors.amber), // Pemberian warna pada container Utama
-                  color: bgColor,
-                  child: AppIntro(i));
-            },
-          );
-        }).toList(),
+    return Container(
+      color: bgColor,
+          child: Padding(
+        padding: EdgeInsets.only(top: 30),
+        child: CarouselSlider(
+          autoPlay: false,
+          enableInfiniteScroll: false,
+          initialPage: 0,
+          reverse: false,
+          viewportFraction: 1.0,
+          aspectRatio: MediaQuery.of(context).size.aspectRatio,
+          height: MediaQuery.of(context).size.height - 30,
+          items: [0, 1, 2].map((i) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                    width: MediaQuery.of(context).size.width,
+                    //margin: EdgeInsets.symmetric(horizontal: 5.0),  // give margins to left and right
+                    //decoration: BoxDecoration(color: Colors.amber), // Pemberian warna pada container Utama
+                    color: bgColor,
+                    child: AppIntro(i));
+              },
+            );
+          }).toList(),
+        ),
       ),
     );
   }
@@ -100,6 +103,7 @@ class _AppIntroState extends State<AppIntro> {
         Container(
           width: MediaQuery.of(context).size.width,
           margin: EdgeInsets.only(top: 48),
+          height: MediaQuery.of(context).size.height - 208,
           child: Column(children: <Widget>[
             Image.asset(
               imagePath[widget.index],
@@ -131,12 +135,12 @@ class _AppIntroState extends State<AppIntro> {
         ), 
         Container(
           margin: EdgeInsets.symmetric(horizontal: 24), //margin left and right handle with EdgeInsert.symetric horizontal
-          color: Colors.red, //color from contrainer
+          //color: Colors.red, //color from contrainer
           height: 80, //height from margin
           child: Stack(children: <Widget>[
             DotsIndicators(widget.index),  //function to indicator when select index position
-            Center(child: new Text('Scroll Right', style: TextStyle(fontFamily: "Avelir", fontSize:10),)),
-            Positioned(top: 40, right: 0,child: widget.index != 2 ? Image.asset('assets/images/arrow.png', width: 30,):  LetsGo()) //position right value like arrow right and change text in last index
+            Center(child: new Text(widget.index != 2 ? 'SCROLL RIGHT': '', style: TextStyle(fontFamily: "Avelir", fontSize:10),)),
+            Positioned(top: widget.index != 2 ? 36 : 0, right: 0,child: widget.index != 2 ? Image.asset('assets/images/arrow.png', width: 30,):  LetsGo()) //position right value like arrow right and change text in last index
           ],),
         ), // memberi warna pada toolbar
       ],
@@ -174,7 +178,7 @@ class LetsGo extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       color: Colors.black,
       child: Stack(children: <Widget>[
-        Positioned(top: 20, left:24,child: Text("LET'S GO!", style: TextStyle(color: Colors.white),),)
+        Positioned(top: 32, left:24,child: Text("LET'S GO!", style: TextStyle(color: Colors.white, fontFamily: 'AvenirBold'),),)
       ],), 
       //Text("LET'S Go !", style: TextStyle(color: Colors.white),),
     );
