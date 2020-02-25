@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_helloworld/menu.dart';
 
 class LoginClass extends StatelessWidget {
   @override
@@ -27,7 +28,11 @@ class LoginClass extends StatelessWidget {
         
 
     var buttonLogin = RaisedButton(
-          onPressed: () {},
+          onPressed: () {
+            print("------------ on Press Login ------------ ");
+            Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => HomePage() ));
+          },
           child: const Text(
             'Login',
             style: TextStyle(fontFamily: "Avelir", fontSize: 16)
