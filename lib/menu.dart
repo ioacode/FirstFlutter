@@ -1,108 +1,57 @@
 import 'package:flutter/material.dart';
-
-class Destination {
-  const Destination(this.title, this.icon, this.color);
-  final String title;
-  final IconData icon;
-  final MaterialColor color;
-}
-
-const List<Destination> allDestinations = <Destination>[
-  Destination('News', Icons.assignment, Colors.grey),
-  Destination('Place', Icons.pin_drop, Colors.grey),
-  Destination('Chat', Icons.chat, Colors.grey),
-  Destination('Login', Icons.assignment_ind, Colors.grey)
-];
-
-class DestinationView extends StatefulWidget {
-  const DestinationView({ Key key, this.destination }) : super(key: key);
-  final Destination destination;
-  @override
-  _DestinationViewState createState() => _DestinationViewState();
-}
-
-class RootPage extends StatelessWidget {
-  final Destination destination;
-  const RootPage({ Key key, this.destination}) : super(key : key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(destination.title),
-        backgroundColor: destination.color,
-      ),
-      backgroundColor: destination.color[50],
-      body: SizedBox.expand(
-        child: InkWell(
-          onTap: (){
-            Navigator.pushNamed(context, "/list");
-          }
-        )
-      ),
-    );
-  }
-}
-
-
-class _DestinationViewState extends State<DestinationView> {
-  @override
-  Widget build(BuildContext context) {
-    return Navigator(
-      onGenerateRoute: (RouteSettings settings) {
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (BuildContext context) {
-            switch(settings.name) {
-              case '/':
-                return RootPage(destination: widget.destination);
-              case '/list':
-                return RootPage(destination: widget.destination);
-              case '/text':
-                return RootPage(destination: widget.destination);
-            }
-          },
-        );
-      },
-    );
-  }
-}
+import 'package:test_helloworld/tabs/tabschat.dart';
+import 'package:test_helloworld/tabs/tabslogin.dart';
+import 'package:test_helloworld/tabs/tabsnews.dart';
+import 'package:test_helloworld/tabs/tabsplace.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin<HomePage> {
-  int _currentIndex = 0;
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  TabController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TabController(length: 4, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        top: false,
-        child: IndexedStack(
-          index: _currentIndex,
-          children: allDestinations.map<Widget>((Destination destination) {
-            return DestinationView(destination: destination);
-          }).toList(),
+      appBar: AppBar(
+        title: Text(
+          "Tutorial Flutter",
+          style: TextStyle(color: Colors.white),
         ),
+        backgroundColor: Colors.blueGrey,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: allDestinations.map((Destination destination) {
-          return BottomNavigationBarItem(
-            icon: Icon(destination.icon),
-            backgroundColor: destination.color,
-            title: Text(destination.title)
-          );
-        }).toList(),
+      body: TabBarView(
+        children: <Widget>[tabsnews(), tabsplace(), tabschat(), tabslogin()],
+        controller: controller,
       ),
+      bottomNavigationBar: Material(
+          color: Colors.blueGrey,
+          child: TabBar(
+            tabs: <Tab>[
+              Tab(icon: Icon(Icons.list)),
+              Tab(icon: Icon(Icons.place)),
+              Tab(icon: Icon(Icons.chat)),
+              Tab(icon: Icon(Icons.brush)),
+            ],
+            controller: controller,
+          )),
     );
   }
 }
