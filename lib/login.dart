@@ -9,58 +9,47 @@ class LoginClass extends StatelessWidget {
       style: TextStyle(fontFamily: "SultanNahia", fontSize: 16),
     );
 
-    var titleLogin = Text("First Flutter", style: TextStyle(fontFamily: "AvenirBold", fontSize: 24),);
+    var titleLogin = Text(
+      "First Flutter",
+      style: TextStyle(fontFamily: "AvenirBold", fontSize: 24),
+    );
 
-    var fieldusername = TextField( decoration: InputDecoration(
-      border: OutlineInputBorder(),
-      labelText: 'Username',
-      labelStyle:TextStyle(fontFamily: "Avelir", fontSize: 14)
-      ),
-      );
-    
-    var fieldpassword = TextField( 
+    var fieldusername = TextField(
+      decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: 'Username',
+          labelStyle: TextStyle(fontFamily: "Avelir", fontSize: 14)),
+    );
+
+    var fieldpassword = TextField(
       obscureText: true,
-      decoration: InputDecoration( border: OutlineInputBorder(),
-      labelText: 'Password', 
-      labelStyle:TextStyle(fontFamily: "Avelir", fontSize: 14)
-      ),
-      );
-        
+      decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: 'Password',
+          labelStyle: TextStyle(fontFamily: "Avelir", fontSize: 14)),
+    );
 
     var buttonLogin = RaisedButton(
-          onPressed: () {
-            print("------------ on Press Login ------------ ");
-            Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => HomePage() ));
-          },
-          child: const Text(
-            'Login',
-            style: TextStyle(fontFamily: "Avelir", fontSize: 16)
-          ),
-        );
+      onPressed: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => HomePage()));
+      },
+      child: const Text('Login',
+          style: TextStyle(fontFamily: "Avelir", fontSize: 16)),
+    );
 
     var containerLogin = Container(
         child: Column(children: <Widget>[
-          Container(
-            height: 48.0, 
-            child: titleLogin
-            ),
-          SizedBox(height: 12),
-          Container(
-            height: 48.0, 
-            child: fieldusername
-            ),
-          SizedBox(height: 12),
-          Container(              
-            height: 48.0, 
-            child: fieldpassword
-            ),
-          SizedBox(height: 16),
-          Container(              
-            height: 48.0, 
-            width: MediaQuery.of(context).size.width,
-            child: buttonLogin
-            ),
+      Container(height: 48.0, child: titleLogin),
+      SizedBox(height: 12),
+      Container(height: 48.0, child: fieldusername),
+      SizedBox(height: 12),
+      Container(height: 48.0, child: fieldpassword),
+      SizedBox(height: 16),
+      Container(
+          height: 48.0,
+          width: MediaQuery.of(context).size.width,
+          child: buttonLogin),
     ]));
 
     return Scaffold(
@@ -68,17 +57,16 @@ class LoginClass extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
-              child: Container(
-            alignment: Alignment.center, 
-            width: MediaQuery.of(context).size.width,
-            child: Center(
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 30),
-                height: MediaQuery.of(context).size.width-100, 
-                child: containerLogin,
-              ),
-            )
-            ),
+            child: Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                child: Center(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 30),
+                    height: MediaQuery.of(context).size.width - 100,
+                    child: containerLogin,
+                  ),
+                )),
           ),
           Align(
             alignment: Alignment.bottomCenter,
