@@ -3,6 +3,14 @@ import 'package:test_helloworld/tabs/tabschat.dart';
 import 'package:test_helloworld/tabs/tabslogin.dart';
 import 'package:test_helloworld/tabs/tabsnews.dart';
 import 'package:test_helloworld/tabs/tabsplace.dart';
+import 'package:test_helloworld/model/datamodel.dart';
+
+const List<TitleMenu> titleList = <TitleMenu>[
+  TitleMenu('News'),
+  TitleMenu('Maps'),
+  TitleMenu('Chat'),
+  TitleMenu('Setting'),
+]; 
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,14 +36,21 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Tutorial Flutter",
-          style: TextStyle(color: Colors.white),
+      appBar: PreferredSize(
+        preferredSize: const Size(double.infinity, 0),
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+          "",
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Avenir',
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        backgroundColor: Colors.blueGrey,
-        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent, 
         centerTitle: true,
+        ) 
       ),
       body: TabBarView(
         children: <Widget>[tabsnews(), tabsplace(), tabschat(), tabslogin()],

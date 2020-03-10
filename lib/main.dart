@@ -101,42 +101,39 @@ class _AppIntroState extends State<AppIntro> {
                     ],
                   ),
                 )),
+                SizedBox(height: 16),
             Expanded(
               child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height - 208,
-                child: Center(
-                  child: Column(children: <Widget>[
-                    Image.asset(
-                      imagePath[widget.index],
-                      fit: BoxFit.fitWidth,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 24),
-                      child: Center(
-                          child: new Text(
-                        title[widget.index],
-                        style: TextStyle(fontFamily: "Caslon", fontSize: 30),
-                      )),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 20),
-                      padding: EdgeInsets.symmetric(horizontal: 55),
-                      child: new RichText(
-                          textAlign: TextAlign.center,
-                          text: new TextSpan(
-                              style: new TextStyle(
-                                  fontSize: 14.0, color: Colors.black),
-                              children: <TextSpan>[
-                                new TextSpan(
-                                    text: description[widget.index],
-                                    style: new TextStyle(fontFamily: 'Avenir')),
-                              ])),
-                    )
-                  ]),
-                ),
-              ),
+                  child: Center(
+                      child: Image.asset(imagePath[widget.index],
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          height: MediaQuery.of(context).size.width / 1.2))),
             ),
+            Expanded(
+                child: Column(children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 24),
+                child: Center(
+                    child: new Text(
+                  title[widget.index],
+                  style: TextStyle(fontFamily: "Caslon", fontSize: 30),
+                )),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                padding: EdgeInsets.symmetric(horizontal: 55),
+                child: new RichText(
+                    textAlign: TextAlign.center,
+                    text: new TextSpan(
+                        style:
+                            new TextStyle(fontSize: 14.0, color: Colors.black),
+                        children: <TextSpan>[
+                          new TextSpan(
+                              text: description[widget.index],
+                              style: new TextStyle(fontFamily: 'Avenir')),
+                        ])),
+              )
+            ])),
             Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(

@@ -14,11 +14,20 @@ class tabsplace extends StatelessWidget {
           icon: BitmapDescriptor.defaultMarker),
     );
 
-    return Scaffold( 
+    return Scaffold(
       body: GoogleMap(
+        onTap: (position) {
+          _makers.add(
+            Marker(
+                markerId:
+                    MarkerId("${position.latitude}, ${position.longitude}"),
+                icon: BitmapDescriptor.defaultMarker,
+                position: position),
+          );
+        },
         mapType: MapType.normal,
         initialCameraPosition:
-            CameraPosition(target: LatLng(3.595196, 98.672226), zoom: 50.0),
+            CameraPosition(target: LatLng(3.595196, 98.672226), zoom: 14.0),
         markers: _makers,
       ),
     );
