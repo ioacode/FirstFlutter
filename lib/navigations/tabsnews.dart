@@ -1,38 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:test_helloworld/model/datamodel.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
-BoxDecoration myBoxDecoration() {
-  return BoxDecoration(
-      borderRadius: BorderRadius.circular(8),
-      border: Border.all(color: Colors.black12),
-      color: Colors.white);
-}
-
-const List<Mainmenu> allMenu = <Mainmenu>[
-  Mainmenu('Login'),
-  Mainmenu('Register'),
-  Mainmenu('Pembayaran'),
-  Mainmenu('Cabang'),
-  Mainmenu('Pembelian'),
-  Mainmenu('Informasi'),
-  Mainmenu('Produk'),
-  Mainmenu('Jadwal Sholat'),
-  Mainmenu('Ayat'),
-  Mainmenu('Hadist'),
-  Mainmenu('Pengajuan'),
-  Mainmenu('Card'),
-  Mainmenu('Mainmenu')
-];
-
-const List<Populermenu> allPopulerMenu = <Populermenu>[
-  Populermenu('Transfer'),
-  Populermenu('Pembayaran'),
-  Populermenu('Pembelian'),
-  Populermenu('QR Code')
-];
+import 'package:test_helloworld/setting/utility.dart';
 
 class tabsnews extends StatelessWidget {
+  final List<Mainmenu> allMenu = <Mainmenu>[
+    Mainmenu('Login'),
+    Mainmenu('Register'),
+    Mainmenu('Pembayaran'),
+    Mainmenu('Cabang'),
+    Mainmenu('Pembelian'),
+    Mainmenu('Informasi'),
+    Mainmenu('Produk'),
+    Mainmenu('Jadwal Sholat'),
+    Mainmenu('Ayat'),
+    Mainmenu('Hadist'),
+    Mainmenu('Pengajuan'),
+    Mainmenu('Card'),
+    Mainmenu('Mainmenu')
+  ];
+
+  final List<Populermenu> allPopulerMenu = <Populermenu>[
+    Populermenu('Transfer'),
+    Populermenu('Pembayaran'),
+    Populermenu('Pembelian'),
+    Populermenu('QR Code')
+  ];
+
   @override
   Widget build(BuildContext context) {
     double heightAll = MediaQuery.of(context).size.height;
@@ -120,11 +114,9 @@ class tabsnews extends StatelessWidget {
       SizedBox(height: 8),
       Expanded(
           child: Container(
-
               margin: EdgeInsets.only(left: 8, right: 8, bottom: 8),
               color: Colors.white,
               child: GridView.builder(
-                
                   itemCount: allMenu.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
@@ -143,29 +135,29 @@ class tabsnews extends StatelessWidget {
                             .show();
                       },
                       child: Container(
-                        decoration: myBoxDecoration(),
+                          decoration: myBoxDecoration(),
                           child: Row(children: <Widget>[
-                        new Flexible(
-                          child: new Column(
-                            children: <Widget>[
-                              SizedBox(height: 4),
-                              Center(
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.lightGreen,
-                                  radius: 22.0,
-                                ),
+                            new Flexible(
+                              child: new Column(
+                                children: <Widget>[
+                                  SizedBox(height: 4),
+                                  Center(
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.lightGreen,
+                                      radius: 22.0,
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Container(
+                                      child: Text(
+                                    allMenu[index].name,
+                                    style: TextStyle(
+                                        fontFamily: 'Avenir', fontSize: 10),
+                                  ))
+                                ],
                               ),
-                              SizedBox(height: 4),
-                              Container(
-                                  child: Text(
-                                allMenu[index].name,
-                                style: TextStyle(
-                                    fontFamily: 'Avenir', fontSize: 10),
-                              ))
-                            ],
-                          ),
-                        )
-                      ])),
+                            )
+                          ])),
                     ));
                   }))),
     ]);
