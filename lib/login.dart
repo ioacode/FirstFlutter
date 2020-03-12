@@ -1,9 +1,15 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:test_helloworld/menu.dart';
+import 'package:test_helloworld/model/datamodel.dart';
+import 'package:test_helloworld/setting/ApiService.dart';
+import 'package:test_helloworld/setting/ApiSession.dart';
 
 class LoginClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ApiSession apiSession = ApiSession();
+
     var titleRegister = Text(
       "Dont have Account, Please Register.",
       style: TextStyle(fontFamily: "SultanNahia", fontSize: 16),
@@ -31,8 +37,25 @@ class LoginClass extends StatelessWidget {
 
     var buttonLogin = RaisedButton(
       onPressed: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => HomePage()));
+        var requestlogin = {
+          "email": "slametsatimah@gmail.com",
+          "password": "dontlookback"
+        };
+
+        var api = ApiService.login(requestlogin);
+        api.then((response) {
+          final Map parsed = json.decode(response);
+      
+          userlogin login = userlogin();
+          login.Username = parsed['data']['Username'];
+          login.email = parsed['data']['email'];
+          apiSession.save('login', login);
+
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => HomePage()));
+        }, onError: (error) {
+          print("-------- login error ---------");
+        });
       },
       child: const Text('Login',
           style: TextStyle(fontFamily: "Avelir", fontSize: 16)),

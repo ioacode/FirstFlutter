@@ -1,44 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:test_helloworld/model/datamodel.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
-BoxDecoration myBoxDecoration() {
-  return BoxDecoration(
-      borderRadius: BorderRadius.circular(8),
-      border: Border.all(color: Colors.black12),
-      color: Colors.white);
-}
-
-const List<Mainmenu> allMenu = <Mainmenu>[
-  Mainmenu('Login'),
-  Mainmenu('Register'),
-  Mainmenu('Pembayaran'),
-  Mainmenu('Cabang'),
-  Mainmenu('Pembelian'),
-  Mainmenu('Informasi'),
-  Mainmenu('Produk'),
-  Mainmenu('Jadwal Sholat'),
-  Mainmenu('Ayat'),
-  Mainmenu('Hadist'),
-  Mainmenu('Pengajuan'),
-  Mainmenu('Card'),
-  Mainmenu('Mainmenu')
-];
-
-const List<Populermenu> allPopulerMenu = <Populermenu>[
-  Populermenu('Transfer'),
-  Populermenu('Pembayaran'),
-  Populermenu('Pembelian'),
-  Populermenu('QR Code')
-];
+import 'package:test_helloworld/setting/utility.dart';
+import 'package:test_helloworld/setting/ApiSession.dart';
 
 class tabsnews extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: valueNews());
+  }
+}
+
+class valueNews extends StatefulWidget {
+  @override
+  _valueNewsState createState() => _valueNewsState();
+}
+
+class _valueNewsState extends State<valueNews> {
+  ApiSession apiSession = ApiSession();
+  userlogin userxx = userlogin();
+  var username;
+
+  final List<Mainmenu> allMenu = <Mainmenu>[
+    Mainmenu('Login'),
+    Mainmenu('Register'),
+    Mainmenu('Pembayaran'),
+    Mainmenu('Cabang'),
+    Mainmenu('Pembelian'),
+    Mainmenu('Informasi'),
+    Mainmenu('Produk'),
+    Mainmenu('Jadwal Sholat'),
+    Mainmenu('Ayat'),
+    Mainmenu('Hadist'),
+    Mainmenu('Pengajuan'),
+    Mainmenu('Card'),
+    Mainmenu('Mainmenu')
+  ];
+
+  final List<Populermenu> allPopulerMenu = <Populermenu>[
+    Populermenu('Transfer'),
+    Populermenu('Pembayaran'),
+    Populermenu('Pembelian'),
+    Populermenu('QR Code')
+  ];
+
+  loadSession() async {
+    try {
+      userlogin userload = userlogin.fromJson(await apiSession.read('login'));
+      setState(() {
+        userxx = userload;
+      });
+    } catch (ex) {
+      print("error : ${ex}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double heightAll = MediaQuery.of(context).size.height;
     double heightTopLayout = heightAll / 3.0;
     double heightTopContent = heightTopLayout / 3.0;
     double heightTopItem = heightTopLayout / 3.0;
+    loadSession();
 
     return Column(children: <Widget>[
       Container(
@@ -67,12 +90,7 @@ class tabsnews extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 8),
-                            Text("WELCOME FLUTTER",
-                                style: TextStyle(
-                                    fontFamily: 'Avenir',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black)),
+                            Text(userxx.Username),
                             SizedBox(height: 8),
                             Container(
                               height: heightTopItem,
@@ -120,11 +138,9 @@ class tabsnews extends StatelessWidget {
       SizedBox(height: 8),
       Expanded(
           child: Container(
-
               margin: EdgeInsets.only(left: 8, right: 8, bottom: 8),
               color: Colors.white,
               child: GridView.builder(
-                
                   itemCount: allMenu.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
@@ -143,29 +159,29 @@ class tabsnews extends StatelessWidget {
                             .show();
                       },
                       child: Container(
-                        decoration: myBoxDecoration(),
+                          decoration: myBoxDecoration(),
                           child: Row(children: <Widget>[
-                        new Flexible(
-                          child: new Column(
-                            children: <Widget>[
-                              SizedBox(height: 4),
-                              Center(
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.lightGreen,
-                                  radius: 22.0,
-                                ),
+                            new Flexible(
+                              child: new Column(
+                                children: <Widget>[
+                                  SizedBox(height: 4),
+                                  Center(
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.lightGreen,
+                                      radius: 22.0,
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Container(
+                                      child: Text(
+                                    allMenu[index].name,
+                                    style: TextStyle(
+                                        fontFamily: 'Avenir', fontSize: 10),
+                                  ))
+                                ],
                               ),
-                              SizedBox(height: 4),
-                              Container(
-                                  child: Text(
-                                allMenu[index].name,
-                                style: TextStyle(
-                                    fontFamily: 'Avenir', fontSize: 10),
-                              ))
-                            ],
-                          ),
-                        )
-                      ])),
+                            )
+                          ])),
                     ));
                   }))),
     ]);

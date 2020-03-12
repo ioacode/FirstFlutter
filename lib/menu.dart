@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test_helloworld/tabs/tabschat.dart';
-import 'package:test_helloworld/tabs/tabslogin.dart';
-import 'package:test_helloworld/tabs/tabsnews.dart';
-import 'package:test_helloworld/tabs/tabsplace.dart';
+import 'package:test_helloworld/navigations/tabschat.dart';
+import 'package:test_helloworld/navigations/tabslogin.dart';
+import 'package:test_helloworld/navigations/tabsnews.dart';
+import 'package:test_helloworld/navigations/tabsplace.dart';
 import 'package:test_helloworld/model/datamodel.dart';
 
 const List<TitleMenu> titleList = <TitleMenu>[
@@ -10,7 +10,7 @@ const List<TitleMenu> titleList = <TitleMenu>[
   TitleMenu('Maps'),
   TitleMenu('Chat'),
   TitleMenu('Setting'),
-]; 
+];
 
 class HomePage extends StatefulWidget {
   @override
@@ -41,16 +41,16 @@ class _HomePageState extends State<HomePage>
         child: AppBar(
           automaticallyImplyLeading: false,
           title: Text(
-          "",
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: 'Avenir',
-            fontWeight: FontWeight.bold,
+            "",
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Avenir',
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
         ),
-        backgroundColor: Colors.transparent, 
-        centerTitle: true,
-        ) 
       ),
       body: TabBarView(
         children: <Widget>[tabsnews(), tabsplace(), tabschat(), tabslogin()],
