@@ -45,9 +45,3 @@ class send extends StatelessWidget {
     );
   }
 }
-
-class User {
-  String name;
-  int id;
-  User({this.name, this.id});
-}

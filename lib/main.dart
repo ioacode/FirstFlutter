@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:test_helloworld/login.dart';
 import 'attr.dart';
-import 'login.dart';
+import 'login.dart'; 
 
-//void main() => runApp(MyApp());
-void main() => runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
+void main(){ 
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
       title: 'Application intro',
       home: HomePage(),
-    ));
+  ));
+}
 
 class HomePage extends StatelessWidget {
   @override

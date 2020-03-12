@@ -2,8 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:test_helloworld/model/datamodel.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:test_helloworld/setting/utility.dart';
+import 'package:test_helloworld/setting/ApiSession.dart';
 
 class tabsnews extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: valueNews());
+  }
+}
+
+class valueNews extends StatefulWidget {
+  @override
+  _valueNewsState createState() => _valueNewsState();
+}
+
+class _valueNewsState extends State<valueNews> {
+  ApiSession apiSession = ApiSession();
+  userlogin userxx = userlogin();
+  var username;
+
   final List<Mainmenu> allMenu = <Mainmenu>[
     Mainmenu('Login'),
     Mainmenu('Register'),
@@ -27,12 +44,24 @@ class tabsnews extends StatelessWidget {
     Populermenu('QR Code')
   ];
 
+  loadSession() async {
+    try {
+      userlogin userload = userlogin.fromJson(await apiSession.read('login'));
+      setState(() {
+        userxx = userload;
+      });
+    } catch (ex) {
+      print("error : ${ex}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double heightAll = MediaQuery.of(context).size.height;
     double heightTopLayout = heightAll / 3.0;
     double heightTopContent = heightTopLayout / 3.0;
     double heightTopItem = heightTopLayout / 3.0;
+    loadSession();
 
     return Column(children: <Widget>[
       Container(
@@ -61,12 +90,7 @@ class tabsnews extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 8),
-                            Text("WELCOME FLUTTER",
-                                style: TextStyle(
-                                    fontFamily: 'Avenir',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black)),
+                            Text(userxx.Username),
                             SizedBox(height: 8),
                             Container(
                               height: heightTopItem,

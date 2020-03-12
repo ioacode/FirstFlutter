@@ -10,7 +10,7 @@ const List<TitleMenu> titleList = <TitleMenu>[
   TitleMenu('Maps'),
   TitleMenu('Chat'),
   TitleMenu('Setting'),
-]; 
+];
 
 class HomePage extends StatefulWidget {
   @override
@@ -38,10 +38,9 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 0),
-        child: 
-          AppBar(
-            automaticallyImplyLeading: false,
-            title: Text(
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
             "",
             style: TextStyle(
               color: Colors.white,
@@ -49,9 +48,9 @@ class _HomePageState extends State<HomePage>
               fontWeight: FontWeight.bold,
             ),
           ),
-          backgroundColor: Colors.transparent, 
+          backgroundColor: Colors.transparent,
           centerTitle: true,
-          ),
+        ),
       ),
       body: TabBarView(
         children: <Widget>[tabsnews(), tabsplace(), tabschat(), tabslogin()],
